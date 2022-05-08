@@ -9,7 +9,9 @@ from matplotlib import pylab
 def validInput(x1,x2,func):
     #if entered max and min value is not a number
     func = func.split(" ")
-    if not x1.isdigit() or not x2.isdigit():
+    #to accept the negative numbers
+
+    if not x1.lstrip("-").isdigit() or not x2.lstrip("-").isdigit():
         tkinter.messagebox.showerror("Error", "Please make sure you typed integer into minimum and maximum value")
         return False
     #if min value is empty
@@ -94,7 +96,8 @@ def evaluatePostfix(func):
     list = func.split(" ")
     for i in list:
         #if the character is digit, we put it in the stack
-        if i.isdigit():
+        #lstrip to make sure we handle negative numbers too
+        if i.lstrip("-").isdigit():
             stack.append(i)
         else:
             #if it is operation, we pop last two elements of the stack and perform the operation on them
