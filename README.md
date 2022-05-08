@@ -4,6 +4,10 @@ A simple GUI Python program to plot any function in x from a starting point to e
 ## Libraries used
 1. Tkinkter 
 2. matplotlib
+## Layout
+
+![image](https://user-images.githubusercontent.com/41492875/167320687-559dde2d-0e73-41fa-998b-8542e5db0154.png)
+
 
 ## Test cases 
 x1 = -2, x2= 3, function = 5 * x<sup>3</sup> + 2 * x. 
