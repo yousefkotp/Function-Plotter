@@ -9,7 +9,7 @@ from matplotlib import pylab
 def validInput(x1,x2,func):
     #if entered max and min value is not a number
     func = func.split(" ")
-    #to accept the negative numbers
+    #lstrip to accept the negative numbers
 
     if not x1.lstrip("-").isdigit() or not x2.lstrip("-").isdigit():
         tkinter.messagebox.showerror("Error", "Please make sure you typed integer into minimum and maximum value")
