@@ -7,8 +7,9 @@ from matplotlib import pylab
 
 #function to validate input
 def validInput(x1,x2,func):
-    #if entered max and min value is not a number
     func = func.split(" ")
+    #if entered max and min value is not a number
+    
     #lstrip to accept the negative numbers
 
     if not x1.lstrip("-").isdigit() or not x2.lstrip("-").isdigit():
