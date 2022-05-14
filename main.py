@@ -7,26 +7,29 @@ from matplotlib import pylab
 
 #function to validate input
 def validInput(x1,x2,func):
+    list = func.split(" ")                      #will be used later for error detection
     func = func.split(" ")
-    #if entered max and min value is not a number
-    
-    #lstrip to accept the negative numbers
 
-    if not x1.lstrip("-").isdigit() or not x2.lstrip("-").isdigit():
+    # if entered max and min value is not a number
+    if not x1.lstrip("-").isdigit() or not x2.lstrip("-").isdigit():                #lstrip to accept the negative numbers
         tkinter.messagebox.showerror("Error", "Please make sure you typed integer into minimum and maximum value")
         return False
+
     #if min value is empty
     if x1 == "":
         tkinter.messagebox.showerror("Error", "Please make sure you typed input into minimum value")
         return False
+
     #if max value is empty
     if x2 == "":
         tkinter.messagebox.showerror("Error", "Please make sure you typed input into maximum value")
         return False
+
     #if max is smaller than min value
     if x2<x1:
         tkinter.messagebox.showerror("Error","Maximum value can't be smaller than minimum value")
         return False
+
     #if function expression is empty
     if func=="":
         tkinter.messagebox.showerror("Error", "You entered empty function")
@@ -36,33 +39,46 @@ def validInput(x1,x2,func):
     if func[0] =="+" or func[0]=="-" or func[0]=="*" or func[0]=="/" or func[0]=="^":
         tkinter.messagebox.showerror("Error", "Please check the function you entered")
         return False
+
     #if function ends with operation
     if func[-1] =="+" or func[-1]=="-" or func[-1]=="*" or func[-1]=="/" or func[-1]=="^":
         tkinter.messagebox.showerror("Error", "Please check the function you entered")
         return False
+
     #if function has another letter other than x and numbers and operations
     for i in func:
-        if i != "+" and i!="-" and i!="*" and i!="/" and i!="^" and not i.isdigit() and i !="x":
-            tkinter.messagebox.showerror("Error", "Please check the function you entered")
+        if i != "+" and i!="-" and i!="*" and i!="/" and i!="^" and not i.lstrip("-").isdigit() and i !="x":
+            tkinter.messagebox.showerror("Error", "Unknown variable "+str(i)+ "(enter the function in x only)")
             return False
+
     #if length of function is 1 and it is not a number or x
-    if len(func)==1 and not func[0].isdigit() and func[0]!="x":
+    if len(func)==1 and not func[0].lstrip("-").isdigit() and func[0]!="x":
         tkinter.messagebox.showerror("Error", "Please check the function you entered")
         return False
 
+    #if there is double operation
+    for i in range(len(list)-1):
+        if(list[i]==list[i+1]=='+' or list[i]==list[i+1]=='*'or list[i]==list[i+1]=='-'or list[i]==list[i+1]=='/'or list[i]==list[i+1]=='^'):
+            tkinter.messagebox.showerror("Error", "missing operand between an operation")
+            return False
+        if (list[i].lstrip("-").isdigit() and list[i+1].lstrip("-").isdigit() ):
+            tkinter.messagebox.showerror("Error", "missing operation between two operands")
+            return False
 
     return True
 
 #function to convert function from infix to postfix
 def infixToPostfix(func):
+
     #declaring stack and the postfix expression which will be returned
     stack = []
     postfix = ""
+
     #putting the string representing number and operations into a list
     list = func.split(" ")
     for c in list:
         #if the character is digit or x, we put it immediately in postifx expression
-        if c.isdigit() or c=="x":
+        if c.lstrip("-").isdigit() or c=="x":
             postfix += c
             postfix += " "
         else:
@@ -107,6 +123,7 @@ def evaluatePostfix(func):
             stack.append(eval(val2, val1, i))
     #last element in the stack has the final result
     return int(stack.pop())
+
 def eval(x,y,operation):        #this function evaluate the value of two numbers according to operation between them
     x = int(x)
     y = int(y)
