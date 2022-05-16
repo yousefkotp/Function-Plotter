@@ -1,6 +1,12 @@
 # Function-Plotter
 A simple GUI Python program to plot any function in x from a starting point to ending point.
-
+## Table of Content
+- [Function-Plotter](#function-plotter)
+  * [Libraries used](#libraries-used)
+  * [Layout](#layout)
+  * [Test cases](#test-cases)
+  * [Handling input errors](#handling-input-errors)
+  * [Notes](#notes)
 ## Libraries used
 1. Tkinkter 
 2. matplotlib
