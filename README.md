@@ -42,5 +42,3 @@ x1 = 0, x2 =10, function = 2 + 3 * x - 5
 ## Notes
 > Make sure you enter the function space-separated.
 
-> Starting and ending points can be negative.
-
